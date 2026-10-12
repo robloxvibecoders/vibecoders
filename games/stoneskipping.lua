@@ -750,7 +750,8 @@ local function withAuto(labels)
 end
 
 local zoneLabels = buildZones()
-local eggList = {}
+local eggList = eggIds()
+Cfg.EggId = eggList[1] or ""
 local lastSig = table.concat(zoneLabels, "|")
 local ThrowToggle, TrainToggle, HatchToggle, ZoneDrop, EggDrop
 
@@ -806,8 +807,8 @@ HatchToggle = Grind:CreateToggle({Name = "Auto Hatch", CurrentValue = false, Fla
     turnOffOthers("AutoHatch")
     runHatch()
 end})
-EggDrop = Grind:CreateDropdown({Name = "Egg", Options = {"(loading)"},
-    CurrentOption = {"(loading)"}, MultipleOptions = false, Flag = "EggChoice",
+EggDrop = Grind:CreateDropdown({Name = "Egg", Options = #eggList > 0 and eggList or {"(none found)"},
+    CurrentOption = {eggList[1] or "(none found)"}, MultipleOptions = false, Flag = "EggChoice",
     Callback = function(o)
         local v = type(o) == "table" and o[1] or o
         if v and v ~= "(loading)" and v ~= "(none found)" then Cfg.EggId = v end
@@ -928,6 +929,7 @@ task.spawn(function()
     while Alive and not Net.Request and os.clock() - t0 < 10 do task.wait(0.2) end
     if not Alive then return end
     pcall(function() UILib:LoadConfiguration() end)
+    pcall(function() EggDrop:Set({Cfg.EggId ~= "" and Cfg.EggId or "(none found)"}) end)
     toast("Loaded " .. VERSION .. " by @robloxvibe coder", 4)
     while Alive do
         task.wait(3)
