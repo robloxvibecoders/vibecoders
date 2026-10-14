@@ -5,6 +5,7 @@ local GAMES = {
     [111543903102439] = { name = "Stone Skipping", file = "stoneskipping.lua", reentrant = true },
     [99409088950210] = { name = "Survive a Million Monkeys", file = "survivemonkeys.lua", reentrant = true },
     [115317125060158] = { name = "Survive a Million Monkeys", file = "survivemonkeys.lua", reentrant = true },
+    [114326934417838] = { name = "Break and Steal an Egg", file = "breakandstealegg.lua" },
 }
 
 local function report(msg)
