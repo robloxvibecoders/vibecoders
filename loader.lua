@@ -8,6 +8,7 @@ local GAMES = {
     [114326934417838] = { name = "Break and Steal an Egg", file = "breakandstealegg.lua" },
     [74023858073178] = { name = "Bike For Egg", file = "bikeforeggs.lua" },
     [107535308163741] = { name = "Huss Valley", file = "hussvalley.lua" },
+    [893973440] = { name = "Flee the Facility", file = "fleethefacility.lua" },
 }
 
 local function report(msg)
