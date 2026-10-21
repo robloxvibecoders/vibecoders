@@ -1,4 +1,5 @@
 local BASE_URL = "https://raw.githubusercontent.com/robloxvibecoders/vibecoders/main/games/"
+local LOADER_URL = "https://raw.githubusercontent.com/robloxvibecoders/vibecoders/refs/heads/main/loader.lua"
 
 local GAMES = {
     [443406476] = { name = "Project Lazarus", file = "lazarus.lua" },
@@ -9,6 +10,7 @@ local GAMES = {
     [74023858073178] = { name = "Bike For Egg", file = "bikeforeggs.lua" },
     [107535308163741] = { name = "Huss Valley", file = "hussvalley.lua" },
     [893973440] = { name = "Flee the Facility", file = "fleethefacility.lua" },
+    [72169370437173] = { name = "Tribes 3v3", file = "tribes3v3.lua" },
 }
 
 local function report(msg)
@@ -23,6 +25,17 @@ local entry = GAMES[game.PlaceId]
 if not entry then
     report(string.format("Unsupported place (PlaceId %.0f).", game.PlaceId))
     return
+end
+
+-- Re-run this loader after teleports (once per session)
+local queueTeleport = queue_on_teleport
+    or (syn and syn.queue_on_teleport)
+    or (fluxus and fluxus.queue_on_teleport)
+
+local qenv = (getgenv and getgenv()) or _G
+if queueTeleport and not qenv.__VibecodersQueued then
+    qenv.__VibecodersQueued = true
+    pcall(queueTeleport, 'loadstring(game:HttpGet("' .. LOADER_URL .. '"))()')
 end
 
 local httpRequest = (syn and syn.request) or request or http_request or (fluxus and fluxus.request)
