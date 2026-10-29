@@ -11,6 +11,7 @@ local GAMES = {
     [107535308163741] = { name = "Huss Valley", file = "hussvalley.lua" },
     [893973440] = { name = "Flee the Facility", file = "fleethefacility.lua" },
     [72169370437173] = { name = "Tribes 3v3", file = "tribes3v3.lua" },
+    [119958473240233] = { name = "DONT SPLASH", file = "dontsplash.lua" },
 }
 
 local function report(msg)
