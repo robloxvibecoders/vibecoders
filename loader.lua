@@ -11,7 +11,10 @@ local GAMES = {
     [107535308163741] = { name = "Huss Valley", file = "hussvalley.lua" },
     [893973440] = { name = "Flee the Facility", file = "fleethefacility.lua" },
     [72169370437173] = { name = "Tribes 3v3", file = "tribes3v3.lua" },
-    [119958473240233] = { name = "DONT SPLASH", file = "dontsplash.lua" },
+}
+
+local UNIVERSES = {
+    [10771421858] = { name = "DONT SPLASH", file = "dontsplash.lua", reentrant = true },
 }
 
 local function report(msg)
@@ -22,13 +25,12 @@ if not game:IsLoaded() then
     game.Loaded:Wait()
 end
 
-local entry = GAMES[game.PlaceId]
+local entry = GAMES[game.PlaceId] or UNIVERSES[game.GameId]
 if not entry then
-    report(string.format("Unsupported place (PlaceId %.0f).", game.PlaceId))
+    report(string.format("Unsupported place (PlaceId %.0f, GameId %.0f).", game.PlaceId, game.GameId))
     return
 end
 
--- Re-run this loader after teleports (once per session)
 local queueTeleport = queue_on_teleport
     or (syn and syn.queue_on_teleport)
     or (fluxus and fluxus.queue_on_teleport)
