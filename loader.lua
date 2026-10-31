@@ -10,6 +10,7 @@ local GAMES = {
     [893973440] = { name = "Flee the Facility", file = "fleethefacility.lua" },
     [72169370437173] = { name = "Tribes 3v3", file = "tribes3v3.lua" },
     [120219252362013] = { name = "Throw Food For Animals", file = "throwfoodforanimals.lua", reentrant = true },
+    [9098570654] = { name = "Survive an Apocalypse", file = "surviveanapocalypse.lua", reentrant = true },
 }
 
 local UNIVERSES = {
